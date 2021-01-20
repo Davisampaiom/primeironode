@@ -41,11 +41,10 @@ app.post('/cadastrar' ,(req,res)=>{
 
 })
 app.get('/alerta' , (req, res) => {
-    db.query("SELECT * FROM alertas" , (error, result) =>{
+    db.query("SELECT alertas.alertas as alertas,alertas.id_usuario as id_usuario FROM alertas JOIN cadastro ON alertas.id_usuario=cadastro.id" , (error, result) =>{
         res.json(result)
     })
 })
-
 
 app.post('/alertas' ,(req,res)=>{
    
@@ -54,6 +53,7 @@ app.post('/alertas' ,(req,res)=>{
 
     dados.push({
         alertas: req.body.alertas,
+        id_usuario:req.body.id_usuario,
        
     })
     db.query("INSERT INTO alertas SET?", dados, ()=>{

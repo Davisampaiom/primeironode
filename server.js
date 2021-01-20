@@ -1,33 +1,28 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mysql = require('mysql');
 
 app.use(cors())
 
 app.use(express.json());
 
+const db = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'squad1',
+})
 
 app.get('/cadastro' , (req, res) => {
-    const mysql = require('mysql');
-    const connection = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'squad1',
-    })
-    connection.query("SELECT * FROM `cadastro`" , (error, result) =>{
+   
+    db.query("SELECT * FROM `cadastro`" , (error, result) =>{
         res.json(result)
     })
 })
 
 app.post('/cadastrar' ,(req,res)=>{
-    const mysql = require('mysql');
-    const connection = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'squad1',
-    })
+   
 
     let dados =[]
 
@@ -38,7 +33,7 @@ app.post('/cadastrar' ,(req,res)=>{
         email: req.body.email,
         senha: req.body.senha,
     })
-    connection.query("INSERT INTO cadastro SET?", dados, ()=>{
+    db.query("INSERT INTO cadastro SET?", dados, ()=>{
         dados=[]
 
         return res.json({message:"Dados enviados com sucesso!"})
@@ -46,27 +41,14 @@ app.post('/cadastrar' ,(req,res)=>{
 
 })
 app.get('/alerta' , (req, res) => {
-    const mysql = require('mysql');
-    const connection = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'squad1',
-    })
-    connection.query("SELECT * FROM alertas" , (error, result) =>{
+    db.query("SELECT * FROM alertas" , (error, result) =>{
         res.json(result)
     })
 })
 
 
 app.post('/alertas' ,(req,res)=>{
-    const mysql = require('mysql');
-    const connection = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'squad1',
-    })
+   
 
     let dados =[]
 
@@ -74,7 +56,7 @@ app.post('/alertas' ,(req,res)=>{
         alertas: req.body.alertas,
        
     })
-    connection.query("INSERT INTO alertas SET?", dados, ()=>{
+    db.query("INSERT INTO alertas SET?", dados, ()=>{
         dados=[]
 
         return res.json({message:"Dados enviados com sucesso!"})

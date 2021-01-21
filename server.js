@@ -8,10 +8,10 @@ app.use(cors())
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host:'192.168.1.104',
-    user:'squad1',
-    password:'squad1',
-    database:'squad1',
+    host:'bczpxu0vazl6ajdfgq0k-mysql.services.clever-cloud.com',
+    user:'u8orsmfm7wtqk980',
+    password:'lRm8lJWY1JwvfgK9JlWY',
+    database:'bczpxu0vazl6ajdfgq0k',
 })
 
 app.get('/cadastro' , (req, res) => {

@@ -46,6 +46,13 @@ app.get('/alerta' , (req, res) => {
     })
 })
 
+app.get('/alertas' , (req, res) => {
+    db.query("SELECT * FROM alertas" , (error, result) =>{
+        res.json(result)
+    })
+})
+
+
 app.post('/alertas' ,(req,res)=>{
    
 
@@ -63,6 +70,24 @@ app.post('/alertas' ,(req,res)=>{
     })
 
 })
+
+
+app.delete('/id=:id', (req,res,next )=>{
+    let alerta = req.params.idalertas
+
+    db.query(`DELETE FROM alertas WHERE id=${alerta}`, ()=>{
+        res.json({message: 'Alerta excluido com sucesso!'})
+    })
+})
+
+app.put('/:id', (req,res) =>{
+    let alerta = {
+        idalertas : req.params.idalertas,
+        alertas: req.params.alertas
+    }
+
+    db.query(`UPDATE alertas SET alertas='${alerta.alertas}' WHERE idalertas='${alerta.idalertas}'`)
+} )
 
 
 app.listen(process.env.PORT || 3010);

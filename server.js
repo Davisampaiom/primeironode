@@ -72,10 +72,10 @@ app.post('/alertas' ,(req,res)=>{
 })
 
 
-app.delete('/id=:id', (req,res,next )=>{
+app.delete('/:id', (req,res,next )=>{
     let alerta = req.params.idalertas
 
-    db.query(`DELETE FROM alertas WHERE id=${alerta}`, ()=>{
+    db.query(`DELETE FROM alertas WHERE id=${idalertas}`, ()=>{
         res.json({message: 'Alerta excluido com sucesso!'})
     })
 })
